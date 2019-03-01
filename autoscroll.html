@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+let x = 0;
+let startScroll;
+
+$('.scrollable').scroll(function () {
+  x = $(this).scrollTop();
+})
+
+$('#scroll-slider').on('input', function () {
+  clearInterval(startScroll);
+ 
+  
+  if ($('#pause').hasClass('active')) {
+    startScroll = setInterval(scroller, 400 / ($('#scroll-slider').val())); 
+  }
+});
+
+$('.scroll-btn').on('click', function () {
+  $('#play').toggleClass('active');
+  $('#pause').toggleClass('active');
+  
+  if ($('#pause').hasClass('active')) {
+    startScroll = setInterval(scroller, 800 /($('#scroll-slider').val()) ); 
+  } else {
+    clearInterval(startScroll);
+  }
+});
+
+function scroller () {
+  x += 1
+  $('.scrollable').scrollTop(x); 
+}
+
+
+</script>
+
+<!--Style disini-->
+<style>
+main {
+  display: flex;
+  align-items: center;
+}
+.song-container {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+
+
+.scrollable {
+  margin-top: 20px;
+  width: 350px;
+  overflow-y: scroll;
+  height: 400px;
+  padding: 0 40px;
+  margin-left: 20px;
+}
+
+.header {
+  position: fixed;
+  padding-left: 30px;
+  width: 350px;
+  height: 50px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+
+.song {
+  margin-top: 50px;
+}
+
+p {
+  line-height: 2;
+}
+
+h2 {
+  display: inline;
+  margin-right: 14px;
+}
+
+#scroll-slider {
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  transform: rotate(90deg)
+}
+
+.scroll-btn {
+  font-size: 28px;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  
+}
+
+#play, #pause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  line-height: 0;
+  opacity: 0;
+}
+
+.active {
+  opacity: 1 !important;
+}
+
+</style>
+
+</head>
+<body>
+<main>
+  <div class="song-container">
+
+    <div class="scrollable"> 
+      <div class="header"> 
+        <h2>Song Title</h2>
+        <span>By Falco</span>
+      </div>
+      <div class="song">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ad nihil aliquam aperiam eos id exercitationem? Recusandae ipsum ullam qui a corrupti, iure consectetur sapiente officiis voluptas ex, unde ut?</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsam, mollitia fugit suscipit, magni laborum veniam eos deserunt delectus iste in eum nulla molestiae voluptates incidunt non provident esse nisi.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, officia. Voluptatum doloribus sunt rem id illo consectetur aperiam quidem iste, voluptatibus similique optio, perferendis obcaecati ut, rerum eum fuga nemo.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ad nihil aliquam aperiam eos id exercitationem? Recusandae ipsum ullam qui a corrupti, iure consectetur sapiente officiis voluptas ex, unde ut?</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsam, mollitia fugit suscipit, magni laborum veniam eos deserunt delectus iste in eum nulla molestiae voluptates incidunt non provident esse nisi.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, officia. Voluptatum doloribus sunt rem id illo consectetur aperiam quidem iste, voluptatibus similique optio, perferendis obcaecati ut, rerum eum fuga nemo.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <div class="scroll-btn">
+      <span id="play" class="active">&#x25b6;</span>
+      <span id="pause">&#x23f8;</span>
+    </div>  
+    <input id="scroll-slider" type="range" value="5" name="speed" min="1" max="10">
+  </div>
+
+</main>
+</body>
+</html>
